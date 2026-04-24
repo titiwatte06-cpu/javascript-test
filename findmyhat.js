@@ -69,7 +69,7 @@ class Field {
             } 
              else if (Math.random() < percent / 100) {  
                 randomField[i].push(hole)
-            }
+            } 
             else {
                 randomField[i].push(fieldChar);
             }
@@ -77,8 +77,11 @@ class Field {
           
         }
     }
-
-    randomField[randomRow][randomColumn] = fieldChar2;
+    
+    if (randomRow !== 0 && randomColumn !== 0) {
+        randomField[randomRow][randomColumn] = fieldChar2;
+        }
+    
 
     return randomField;
 
@@ -98,7 +101,6 @@ class Field {
                 
 
             console.log('ตำแหน่งปัจจุบัน:', this._playerRow, this._playerCol);
-            console.log(this._playerRow);
 
             if (this._playerRow < 0 || this._playerRow >= this._field.length ||
                 this._playerCol < 0 || this._playerCol >= this._field[0].length) {
@@ -133,7 +135,7 @@ class Field {
 
 
 
-const easyField = new Field(Field.generateField(6, 6, 20)); ///รับเอาค่ามา 3 ตัว
+const easyField = new Field(Field.generateField(10, 10, 30)); ///รับเอาค่ามา 3 ตัว
 
 easyField.playGame() ///สั่ง run เพื่อเล่นเกม
 
