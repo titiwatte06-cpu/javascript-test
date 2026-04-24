@@ -103,7 +103,6 @@ class Field {
                 console.log('🎉 You found the hat! You win!');
                 break
             }
-
             this._field[this._playerRow][this._playerCol] = fieldChar1;
                 
             }
