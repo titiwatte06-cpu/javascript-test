@@ -2,7 +2,7 @@ const prompt = require('prompt-sync')({sigint: true});
 
 const fieldChar = '😍';
 const fieldChar1 = '🔥';
-const fieldChar2 = '👍';
+const fieldChar2 = '🎩';
 const hole = '🌒​'
 
 class Field {
@@ -33,7 +33,7 @@ class Field {
   }
 
 
-// ไว้แสดงค่าตารราง
+    // ไว้แสดงค่าตารราง
 
   print(){
     for (let i=0; i<this._field.length; ++i){
@@ -48,6 +48,12 @@ class Field {
 
     const randomField = [];
 
+    // randomRow กับ randomColumn มีไว้เพื่อสุ่มหาตำแหน่งว่าอยู่ในตำแหน่งไหนบ้าง โดย random บนตัวแปร x กับ y ที่จะวนค่าอยู่แค่ในแถวกับ column
+
+    const randomRow = Math.floor(Math.random() * x);
+    const randomColumn = Math.floor(Math.random() * y);
+
+
     /// กำหนดแถวให้กับ พื้นที่ของเราว่าให้มันมีกี่แถว ///
 
     for (let i = 0; i < y; i++) {
@@ -60,17 +66,19 @@ class Field {
         for (let j = 0; j < x; j++) {
             if (i === 0 && j === 0) {
                 randomField[0].push(fieldChar1)
-            } else if (i === 5 && j === 5){
-                randomField[5].push(fieldChar2)
-            } else if (Math.random() < percent / 100) {  
-            randomField[i].push(hole)
+            } 
+             else if (Math.random() < percent / 100) {  
+                randomField[i].push(hole)
             }
             else {
                 randomField[i].push(fieldChar);
-            }    
+            }
+            
+          
         }
     }
 
+    randomField[randomRow][randomColumn] = fieldChar2;
 
     return randomField;
 
@@ -105,7 +113,7 @@ class Field {
 
             
 
-            if (this._playerRow === 5 && this._playerCol === 5) {
+            if (this._field[this._playerRow][this._playerCol] === fieldChar2) {
                 console.log('🎉 You found the hat! You win!');
                 break
             }
