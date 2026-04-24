@@ -67,7 +67,6 @@ class Field {
         while(true){
 
             this.print();
-
             const input = prompt('w=ขึ้น s=ลง a=ซ้าย d=ขวา: ');
 
 
@@ -77,10 +76,14 @@ class Field {
             if (input === 'd') playerCol++; 
 
             console.log('ตำแหน่งปัจจุบัน:', playerRow, playerCol);
-            console.log()
-            this._field[playerRow][playerCol] = fieldChar1;
+            
 
-            if (player)
+            if (this._field[playerRow][playerCol] === hole) {
+                console.log('end')
+                break
+            }
+
+            this._field[playerRow][playerCol] = fieldChar1;
 
             if (playerRow === 5 && playerCol === 5) {
                 console.log('Win! 🎉');
