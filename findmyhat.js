@@ -12,10 +12,28 @@ class Field {
     this._playerCol = 0;
   }
 
+  moveUp() {
+    this._field[this._playerRow][this._playerCol] = fieldChar1;
+    this._playerRow--;
+  }
+
   moveDown() {
     this._field[this._playerRow][this._playerCol] = fieldChar1;
     this._playerRow++;
   }
+
+  moveLeft() {
+    this._field[this._playerRow][this._playerCol] = fieldChar1;
+    this._playerCol--;
+  }
+
+  moveRight() {
+    this._field[this._playerRow][this._playerCol] = fieldChar1;
+    this._playerCol++;
+  }
+
+
+// ไว้แสดงค่าตารราง
 
   print(){
     for (let i=0; i<this._field.length; ++i){
@@ -66,9 +84,9 @@ class Field {
                 
             const input = prompt('w=ขึ้น s=ลง a=ซ้าย d=ขวา: ');
             if (input === 's') this.moveDown();
-            if (input === 'w') this._playerRow--; 
-            if (input === 'a') this._playerCol--; 
-            if (input === 'd') this._playerCol++;   
+            if (input === 'w') this.moveUp(); 
+            if (input === 'a') this.moveLeft(); 
+            if (input === 'd') this.moveRight();   
                 
 
             console.log('ตำแหน่งปัจจุบัน:', this._playerRow, this._playerCol);
@@ -76,13 +94,17 @@ class Field {
 
             if (this._field[this._playerRow][this._playerCol] === hole) {
                 console.log('💀 You fell into a hole! Game over')
+                break
             }
 
-            this._field[this._playerRow][this._playerCol] = fieldChar1;
+            
 
             if (this._playerRow === 5 && this._playerCol === 5) {
                 console.log('🎉 You found the hat! You win!');
+                break
             }
+
+            this._field[this._playerRow][this._playerCol] = fieldChar1;
                 
             }
             
