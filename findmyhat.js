@@ -12,7 +12,10 @@ class Field {
     this._playerCol = 0;
   }
 
-
+  moveDown() {
+    this._field[this._playerRow][this._playerCol] = fieldChar1;
+    this._playerRow++;
+  }
 
   print(){
     for (let i=0; i<this._field.length; ++i){
@@ -58,40 +61,38 @@ class Field {
   //function ให้เล่นเกมใน class ///
 
   playGame() {
-
         while(true){
-
             this.print();
+                
             const input = prompt('w=ขึ้น s=ลง a=ซ้าย d=ขวา: ');
-
-
+            if (input === 's') this.moveDown();
             if (input === 'w') this._playerRow--; 
-            if (input === 's') this._playerRow++; 
             if (input === 'a') this._playerCol--; 
-            if (input === 'd') this._playerCol++; 
+            if (input === 'd') this._playerCol++;   
+                
 
             console.log('ตำแหน่งปัจจุบัน:', this._playerRow, this._playerCol);
             console.log(this._playerRow);
 
             if (this._field[this._playerRow][this._playerCol] === hole) {
                 console.log('💀 You fell into a hole! Game over')
-                break
             }
 
             this._field[this._playerRow][this._playerCol] = fieldChar1;
 
             if (this._playerRow === 5 && this._playerCol === 5) {
                 console.log('🎉 You found the hat! You win!');
-                break 
             }
-
+                
+            }
             
-        }
+    }    
+}            
+        
 
-    }
 
 
-}
+
 
 
 const easyField = new Field(Field.generateField(6, 6, 20)); ///รับเอาค่ามา 3 ตัว
