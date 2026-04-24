@@ -7,11 +7,9 @@ const hole = '🌒​'
 
 class Field {
   constructor(field){
-
     this._field = field;
-    this._xDist = 0;
-    this._yDist = 0;
-
+    this._playerRow = 0;
+    this._playerCol = 0;
   }
 
 
@@ -22,7 +20,7 @@ class Field {
     }
   }
 
-  
+  ///สร้างตารางขึ้นมาโดยรับเอาค่า x และ y และ ค่า percent เพื่อมาใช้ในการสร้างตารางและคำนวนการวางหลุม
   static generateField(x, y, percent){
 
     let numNodes, area = x * y;
@@ -61,34 +59,33 @@ class Field {
 
   playGame() {
 
-        let playerRow = 0;
-        let playerCol = 0;
-
         while(true){
 
             this.print();
             const input = prompt('w=ขึ้น s=ลง a=ซ้าย d=ขวา: ');
 
 
-            if (input === 'w') playerRow--; 
-            if (input === 's') playerRow++; 
-            if (input === 'a') playerCol--; 
-            if (input === 'd') playerCol++; 
+            if (input === 'w') this._playerRow--; 
+            if (input === 's') this._playerRow++; 
+            if (input === 'a') this._playerCol--; 
+            if (input === 'd') this._playerCol++; 
 
-            console.log('ตำแหน่งปัจจุบัน:', playerRow, playerCol);
-            
+            console.log('ตำแหน่งปัจจุบัน:', this._playerRow, this._playerCol);
+            console.log(this._playerRow);
 
-            if (this._field[playerRow][playerCol] === hole) {
-                console.log('end')
+            if (this._field[this._playerRow][this._playerCol] === hole) {
+                console.log('💀 You fell into a hole! Game over')
                 break
             }
 
-            this._field[playerRow][playerCol] = fieldChar1;
+            this._field[this._playerRow][this._playerCol] = fieldChar1;
 
-            if (playerRow === 5 && playerCol === 5) {
-                console.log('Win! 🎉');
+            if (this._playerRow === 5 && this._playerCol === 5) {
+                console.log('🎉 You found the hat! You win!');
                 break 
             }
+
+            
         }
 
     }
@@ -97,7 +94,7 @@ class Field {
 }
 
 
-const easyField = new Field(Field.generateField(6, 6, 25)); ///รับเอาค่ามา 3 ตัว
+const easyField = new Field(Field.generateField(6, 6, 20)); ///รับเอาค่ามา 3 ตัว
 
 easyField.playGame() ///สั่ง run เพื่อเล่นเกม
 
