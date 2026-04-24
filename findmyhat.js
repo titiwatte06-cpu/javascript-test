@@ -92,6 +92,12 @@ class Field {
             console.log('ตำแหน่งปัจจุบัน:', this._playerRow, this._playerCol);
             console.log(this._playerRow);
 
+            if (this._playerRow < 0 || this._playerRow >= this._field.length ||
+                this._playerCol < 0 || this._playerCol >= this._field[0].length) {
+                console.log(' Out of bounds! Game over');
+                break;
+            }
+
             if (this._field[this._playerRow][this._playerCol] === hole) {
                 console.log('💀 You fell into a hole! Game over')
                 break
@@ -103,6 +109,9 @@ class Field {
                 console.log('🎉 You found the hat! You win!');
                 break
             }
+
+            
+
             this._field[this._playerRow][this._playerCol] = fieldChar1;
                 
             }
